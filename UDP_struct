@@ -1,0 +1,23 @@
+struct autonomous_car_inf_UDP {
+    // GPS/INS position
+    double lat;  //Latitude, [dd.dddddd]
+    double lon;  //Longitude, [ddd.dddddd]
+    double alt;  //Altitude, [m]
+
+    // GPS/INS vel [m/s]
+    double vel_x; //NED frame : North
+    double vel_y; //NED frame : East
+    double vel_z; //NED frame : Down
+
+    // GPS/INS attitude [degree]
+    double roll; //body frame : x axis, forward of the vehicle
+    double pitch;//body frame : y axis, lateral out the right side of the vehicle
+    double yaw;  //Navigation frame : z axis, Default direction(0 degree) : North, heading
+    
+    // vehicle (CAN)
+    double speed;     // [m/s]
+    int drv_stat;     // 1 : stop(vehicle speed == 0), 2 : start(vehicle speed !=0)
+    int jerk;         // 0 : normal, 1: acc <-3 [m/s^2]
+} autonomous_car_inf_UDP;
+
+print (struct.unpack('ffffffiiii', autonomous_car_inf_UDP))
